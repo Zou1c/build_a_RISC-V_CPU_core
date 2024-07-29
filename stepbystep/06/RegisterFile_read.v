@@ -43,7 +43,7 @@
    $reset = *reset;
    
    
-   // YOUR CODE HERE
+      // YOUR CODE HERE
    // PC
    $pc[31:0] = >>1$next_pc;
    $next_pc[31:0] = $reset ?  32'b0 : ($pc+32'd4);
@@ -87,6 +87,27 @@
    $imm_valid = $is_j_instr || $is_s_instr || $is_b_instr || 
                 $is_i_instr || $is_u_instr; 
    //
+   //get Instruction
+   $dec_bits[10:0] = {$instr[30], $funct3, $opcode};
+   $is_beq = $dec_bits ==? 11'bx_000_1100011;
+   $is_bne = $dec_bits ==? 11'bx_001_1100011;
+   $is_blt = $dec_bits ==? 11'bx_100_1100011;
+   $is_bge = $dec_bits ==? 11'bx_101_1100011;
+   $is_bltu = $dec_bits ==? 11'bx_110_1100011;
+   $is_bgeu = $dec_bits ==? 11'bx_111_1100011;
+   
+   $is_addi = $dec_bits ==? 11'bx_000_0010011;
+   
+   $is_add = $dec_bits ==? 11'b0_000_0110011;
+   //RF read
+   //change arguments in m4+rf()
+   //$rd_en2 = $rs2_valid;
+   //$rd_en1 = $rs1_valid;
+   //and src $rd_data1=$src1_value and $rd_data2=$src2_value
+   //$rd_index1 = $rs1;
+   //$rd_index2 = $rs2;
+   
+   //
    
    // END YOUR CODE
    
@@ -95,7 +116,7 @@
    *passed = 1'b0;
    *failed = *cyc_cnt > M4_MAX_CYC;
    
-   //m4+rf(32, 32, $reset, $wr_en, $wr_index[4:0], $wr_data[31:0], $rd_en1, $rd_index1[4:0], $rd_data1, $rd_en2, $rd_index2[4:0], $rd_data2)
+   m4+rf(32, 32, $reset, $wr_en, $wr_index[4:0], $wr_data[31:0], $rs1_valid, $rs1, $src1_value, $rs2_valid, $rs2, $src2_value)
    //m4+dmem(32, 32, $reset, $addr[4:0], $wr_en, $wr_data[31:0], $rd_en, $rd_data)
    m4+cpu_viz()
 \SV
