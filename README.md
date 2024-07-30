@@ -120,3 +120,13 @@ Notably, we are making simplifying assumptions about memory. A general-purpose C
 
 ### now you can go
 to the "stepbystep" folder to start building
+
+第一行00 - 05
+第二行06 -
+```
+   // Chapter 4:
+   //    START, PC, IMEM, INSTR_TYPE, FIELDS, IMM, SUBSET_INSTRS,
+   //    RF_MACRO, RF_READ, SUBSET_ALU, RF_WRITE, TAKEN_BR, BR_REDIR, TB,
+   // Chapter 5:
+   //    TEST_PROG, ALL_INSTRS, FULL_ALU, JUMP, LD_ST_ADDR, DMEM, LD_DATA, DONE
+```
