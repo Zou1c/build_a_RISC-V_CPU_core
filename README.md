@@ -4,6 +4,18 @@ website:
 ```
 https://learning.edx.org/course/course-v1:LinuxFoundationX+LFD111x+1T2024/home
 ```
+### Tools
+- 使用Makerchip.com在线IDE
+- TL-Verilog语言
+- m4系列的各种库（直接按照实验步骤使用即可）  
+
+在本实验中，你将会尝试：  
+1. 在Editor中写verilog；
+2. 阅读Log来帮助编译和测试；
+3. 读懂WaveForm图(其实是可选项，不需要很会)；
+4. 观察编译生成的Diagram图，将各种变量以小组件的方式可视化，并能看到他的表达式；
+5. 使用m4库里的图形化调试工具VIZ（每个时钟周期单步调试）
+
 ### Motivation
 (使用的语言与verilog还是有一些区别的)
 For those curious about the motivation for this file structure, it is necessary to understand the strategy for evolving TL-Verilog from Verilog. The ultimate goal is to eventually introduce a new modeling language philosophically different from Verilog in all respects. This will play out over the next decade or decades. In the meantime, we work toward this incrementally, layering on Verilog as a working starting point, with TL-Verilog as a language extension to Verilog. This layering also provides an essential and incremental migration path. And, as tools mature, it is always possible to fall back on Verilog.

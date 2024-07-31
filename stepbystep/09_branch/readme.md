@@ -29,3 +29,5 @@ what to do?
 3. "add one condition" in $next_pc
 4. replace the line "*passed = 1'b0" with m4+tb()——and it says simulation PASSED in Log
 
+### final
+wow, you completed Chapter 4
