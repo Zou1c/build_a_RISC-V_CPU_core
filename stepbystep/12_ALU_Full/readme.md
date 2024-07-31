@@ -8,7 +8,13 @@ complete ALU:
 ![alt text](image-1.png)
 
 ### how
+$result  
 
+$sltu_rslt  
+$sltiu_rslt  
+$sext_src1  
+$sra_rslt  
+$srai_rslt  
 
 ### res
 

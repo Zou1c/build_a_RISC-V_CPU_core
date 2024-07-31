@@ -169,6 +169,7 @@
    $is_lui = $dec_bits ==? 11'bx_xxx_0110111;
    $is_auipc = $dec_bits ==? 11'bx_xxx_0010111;
    $is_jal = $dec_bits ==? 11'bx_xxx_1101111;
+   $is_jalr = $dec_bits ==? 11'bx_000_1100111;
    
    $is_slti = $dec_bits ==? 11'bx_010_0010011;
    
