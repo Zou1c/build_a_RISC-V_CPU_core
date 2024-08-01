@@ -5,7 +5,7 @@ website:
 https://learning.edx.org/course/course-v1:LinuxFoundationX+LFD111x+1T2024/home
 ```
 ### Tools
-- 使用Makerchip.com在线IDE
+- 使用Makerchip.com在线EDA(IDE?)
 - TL-Verilog语言
 - m4系列的各种库（直接按照实验步骤使用即可）  
 
@@ -15,6 +15,9 @@ https://learning.edx.org/course/course-v1:LinuxFoundationX+LFD111x+1T2024/home
 3. 读懂WaveForm图(其实是可选项，不需要很会)；
 4. 观察编译生成的Diagram图，将各种变量以小组件的方式可视化，并能看到他的表达式；
 5. 使用m4库里的图形化调试工具VIZ（每个时钟周期单步调试）
+
+**开始(starting-point code)与结束(standard solutions)都在这里：**  
+https://github.com/stevehoover/LF-Building-a-RISC-V-CPU-Core?tab=readme-ov-file
 
 ### Motivation
 (使用的语言与verilog还是有一些区别的)
