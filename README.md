@@ -1,9 +1,15 @@
 # build_a_RISC-V_CPU_core
 
-website:
+website to learn:
 ```
-https://learning.edx.org/course/course-v1:LinuxFoundationX+LFD111x+1T2024/home
+https://www.edx.org/learn/design/the-linux-foundation-building-a-risc-v-cpu-core
+```  
+
+or you can go to 
 ```
+makerchip.com/sandbox/#
+```
+and click "LEARN"->"Courses"->find the course "Building a RISC-V CPU Core"->"TAKE THE COURSE IN EDX"
 ### Tools
 - 使用Makerchip.com在线EDA(IDE?)
 - TL-Verilog语言
@@ -134,10 +140,12 @@ In this course, we are focused on the CPU core only. We are ignoring all of the 
 Notably, we are making simplifying assumptions about memory. A general-purpose CPU would typically have a large memory holding both instructions and data. At any reasonable clock speed, it would take many clock cycles to access memory. Caches would be used to hold recently-accessed memory data close to the CPU core. We are ignoring all of these sources of complexity. We are choosing to implement separate, and very small, instruction and data memories. It is typical to implement separate, single-cycle instruction and data caches, and our IMem and DMem are not unlike such caches.
 
 ### now you can go
-to the "stepbystep" folder to start building
+to the "stepbystep" folder to start building  
+（the "lab" folder conatines some basic logics, just help you learn better. you can run them casually to see what happens in Waveform）
 
-第一行00 - 05
-第二行06 -
+第一行要做的东西对应00 - 05  
+第二行要做的东西对应06 - 09  
+第三行(chapter 5)对应10 - 15  
 ```
    // Chapter 4:
    //    START, PC, IMEM, INSTR_TYPE, FIELDS, IMM, SUBSET_INSTRS,
