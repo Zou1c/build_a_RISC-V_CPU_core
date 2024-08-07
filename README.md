@@ -25,7 +25,7 @@ and click "LEARN"->"Courses"->find the course "Building a RISC-V CPU Core"->"TAK
 **开始(starting-point code)与结束(standard solutions)都在这里：**  
 https://github.com/stevehoover/LF-Building-a-RISC-V-CPU-Core?tab=readme-ov-file
 
-### Motivation
+### Motivation(of the course)
 (使用的语言与verilog还是有一些区别的)
 For those curious about the motivation for this file structure, it is necessary to understand the strategy for evolving TL-Verilog from Verilog. The ultimate goal is to eventually introduce a new modeling language philosophically different from Verilog in all respects. This will play out over the next decade or decades. In the meantime, we work toward this incrementally, layering on Verilog as a working starting point, with TL-Verilog as a language extension to Verilog. This layering also provides an essential and incremental migration path. And, as tools mature, it is always possible to fall back on Verilog.
 
@@ -35,8 +35,10 @@ By using TL-Verilog syntax only within module definitions, Verilog-based tools t
 
 Everything we will do in this course will be inside the \TLV region, but now you understand how this connects with Verilog-based tools.
 
+## Quick Look
+(Most of the knowledge comes from the course and I think them suitable for early understanding)
 ### Clock
-虽然也有触发器作用于时钟的下降沿，但我们的电路只会在上升沿工作。
+虽然也有触发器作用于时钟的下降沿，但这里的电路只会在上升沿工作。
 
 The clock is driven throughout the circuit to "flip-flops" which sequence the logic. Flip-flops come in various flavors, but the simplest and most common type of flip-flop, and the only one we will concern ourselves with, is called a "positive-edge-triggered D-type flip-flop". These drive the value at their input to their output, but only when the clock rises. They hold their output value until the next rising edge of their clock input.
 
@@ -44,8 +46,8 @@ The clock is driven throughout the circuit to "flip-flops" which sequence the lo
 ![alt text](img/image.png)
 
 
-### ch3 The Role of RISC-V
-This chapter describes, at a high level, the role played by RISC-V and how it fits into the scene. **How does a program get compiled and eventually execute on a RISC-V CPU core?**
+### The Role of RISC-V
+This chapter(Ch3) describes, at a high level, the role played by RISC-V and how it fits into the scene. **How does a program get compiled and eventually execute on a RISC-V CPU core?**
 
 By the end of this chapter, you should understand:
 
@@ -60,13 +62,13 @@ Likely, you have experience writing programs in languages like Python, JavaScrip
 
 A *compiler* does the job of translating a program’s source code into a *binary file* or executable containing machine instructions for a particular ISA. An operating system (and perhaps a runtime environment) does the job of loading the binary file into memory for execution by the CPU hardware that understands the given ISA.  
 【commonly:】  
-![alt text](img/image2.png)
+![alt text](img/image2.png)  
 ————————我是一条线—————————
 
 *The binary file is easily interpreted by hardware*, but not so easily by a human. **The ISA defines a human-readable form of every instruction, as well as the mapping of those human-readable assembly instructions into bits.** In addition to producing binary files, compilers can generate assembly code. An assembler can compile the assembly code into a binary file. In addition to providing visibility to compiler output, assembly programs can also be written by hand. This is useful for hardware tests and other situations where direct low-level control is needed.   
 (You will use assembly-level test programs in this course to debug your RISC-V design.)  
 【but exactly:】  
-![alt text](img/image3.png)
+![alt text](img/image3.png)  
 
 #### almost start
  In this course, you will build a simple CPU that supports the RISC-V ISA.   
@@ -90,7 +92,7 @@ The indices (0-31) identifying the register(s) in the register file containing t
 The index (0-31) of the register into which the instruction’s result is written.
 - **immediate**  
 A value contained within the instruction bits themselves. This value may provide an offset for indexing into memory or a value upon which to operate (in place of the register value indexed by rs2).  
-![alt text](img/instruction_formats.png)
+![alt text](img/instruction_formats.png)  
 
 You’ll learn further details of the ISA as you build your CPU.
 
@@ -98,19 +100,19 @@ You’ll learn further details of the ISA as you build your CPU.
 
 ### RISC-V-Subset CPU
 #### finally alomost start
-In this chapter, you will build a subset of your RISC-V CPU core capable of executing a test program that adds numbers from 1 to 9. Subsequently, you will complete the functionality of your core.
+In this chapter(Ch4), you will build a subset of your RISC-V CPU core capable of executing a test program that adds numbers from 1 to 9. Subsequently, you will complete the functionality of your core.
 
 #### CPU Microarchitecture and Implementation Plan
 CPUs come in many flavors, from small microcontrollers, optimized for small area and low power, to desktop and server processors, optimized for performance. Within several hours, you will construct a CPU core that could be appropriate as a microcontroller. In contrast, a desktop or server CPU chip might be built by a team of hundreds of seasoned engineers over a period of several years.
 
-Our CPU will fully execute one instruction with each new clock cycle. Doing all of this work within a single clock cycle is only possible if the clock is running relatively slowly, which is our assumption.
+This CPU will fully execute one instruction with each new clock cycle. Doing all of this work within a single clock cycle is only possible if the clock is running relatively slowly, which is the assumption.
 
 We will start by implementing enough of the CPU to execute our test program. As you add each new piece of functionality, you will see in the VIZ pane the behavior you implemented, with more and more of the test program executing correctly until it is successfully summing numbers from one to nine. Then we will go back to implement support for the bulk of the RV32I instruction set.
 
 ---
 
-Let’s look at the components of our CPU, following the flow of an instruction through the logic. This is also roughly the order in which we will implement the logic.
-![alt text](img/cpu_components.png)
+Let’s look at the components of the CPU, following the flow of an instruction through the logic. This is also roughly the order in which we will implement the logic.
+![alt text](img/cpu_components.png)  
 (IMem: instruction memory; DMem: Data memory)
 1. **PC Logic**  
 This logic is responsible for the program counter (PC). The PC identifies the instruction our CPU will execute next. Most instructions execute sequentially, meaning the default behavior of the PC is to increment to the following instruction each clock cycle. Branch and jump instructions, however, are non-sequential. They specify a target instruction to execute next, and the PC logic must update the PC accordingly.  
@@ -131,16 +133,16 @@ Now that we have the register values, it’s time to operate on them. This is th
 Now the result value from the ALU can be written back to the destination register specified in the instruction.  
 
 7. **DMem**  
-Our test program executes entirely out of the register file and does not require a data memory (DMem). But no CPU is complete without one. *The DMem is written to by store instructions and read from by load instructions.*
+The provided test program executes entirely out of the register file and does not require a data memory (DMem). But no CPU is complete without one. *The DMem is written to by store instructions and read from by load instructions.*
 
 #### pay attention
 In this course, we are focused on the CPU core only. We are ignoring all of the logic that would be necessary to interface with the surrounding system, such as **input/output (I/O) controllers, interrupt logic, system timers, etc.**  
 
 
-Notably, we are making simplifying assumptions about memory. A general-purpose CPU would typically have a large memory holding both instructions and data. At any reasonable clock speed, it would take many clock cycles to access memory. Caches would be used to hold recently-accessed memory data close to the CPU core. We are ignoring all of these sources of complexity. We are choosing to implement separate, and very small, instruction and data memories. It is typical to implement separate, single-cycle instruction and data caches, and our IMem and DMem are not unlike such caches.
+> Notably, we are making simplifying assumptions about memory. A general-purpose CPU would typically have a large memory holding both instructions and data. At any reasonable clock speed, it would take many clock cycles to access memory. Caches would be used to hold recently-accessed memory data close to the CPU core. We are ignoring all of these sources of complexity. We are choosing to implement separate, and very small, instruction and data memories. It is typical to implement separate, single-cycle instruction and data caches, and our IMem and DMem are not unlike such caches.
 
-### now you can go
-to the "stepbystep" folder to start building  
+## Now you can begin to build your Logic Circuit
+Move to the "stepbystep" folder to start building  
 （the "lab" folder conatines some basic logics, just help you learn better. you can run them casually to see what happens in Waveform）
 
 第一行要做的东西对应00 - 05  
